@@ -63,4 +63,5 @@ def main(n):
 
 
 for i in os.listdir("./in"):
+  print(f">> {i}")
   main(i)
