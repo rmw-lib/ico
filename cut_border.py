@@ -62,6 +62,6 @@ def main(n):
   print("裁剪总用时", endtime)
 
 
-for i in os.listdir("./in"):
+for i in sorted(os.listdir("./in")):
   print(f">> {i}")
   main(i)
