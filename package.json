@@ -1,0 +1,11 @@
+{
+  "name": "ico",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:rmw-lib/ico.git",
+  "author": "gcxfd <i@rmw.link>",
+  "license": "MIT",
+  "dependencies": {
+    "sharp": "^0.27.1"
+  }
+}
