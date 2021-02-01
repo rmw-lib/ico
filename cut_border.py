@@ -36,10 +36,10 @@ def change_size(read_file):
   return image
 
 
-def main():
+def main(n):
 
-  source_path = "./in/"  # 图片来源路径
-  save_path = "./out/"  # 图片修改后的保存路径
+  source_path = f"./in/{n}/"  # 图片来源路径
+  save_path = f"./out/{n}/"  # 图片修改后的保存路径
 
   if not os.path.exists(save_path):
     os.mkdir(save_path)
@@ -62,4 +62,5 @@ def main():
   print("裁剪总用时", endtime)
 
 
-main()
+for i in os.listdir("./in"):
+  main(i)
