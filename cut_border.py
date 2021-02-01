@@ -2,6 +2,7 @@
 
 import traceback
 from skimage import io
+from os.path import isfile
 import cv2
 import os
 import datetime
@@ -50,16 +51,16 @@ def main(n):
 
   starttime = datetime.datetime.now()
   for i in range(len(file_names)):
-    print(i, "裁剪：", file_names[i])
+    fname = file_names[i]
+    print(i, "裁剪：", fname)
+    outname = file_names[i].replace("jpg", "png")
+    outfile = save_path + outname
+    if isfile(outfile[:-3] + "avif"):
+      continue
     try:
       x = change_size(
-        source_path + file_names[i]
+        source_path + fname
       )  # 得到文件名
-      outname = file_names[i].replace(
-        "jpg",
-        "png"
-      )
-      outfile = save_path + outname
       io.imsave(outfile, x)
       cmd = f"/root/.yarn/bin/coffee ./png2avif.coffee {outfile}"
       run(cmd)
