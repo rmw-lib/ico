@@ -1,10 +1,12 @@
 #!/usr/bin/env python3
 
+import traceback
 from skimage import io
 import cv2
 import os
 import datetime
 import numpy as np
+from pexpect import run
 
 
 def autocrop(img):
@@ -48,12 +50,22 @@ def main(n):
 
   starttime = datetime.datetime.now()
   for i in range(len(file_names)):
-    x = change_size(
-      source_path + file_names[i]
-    )  # 得到文件名
-    outname = file_names[i].replace("jpg", "png")
-    io.imsave(save_path + outname, x)
     print(i, "裁剪：", file_names[i])
+    try:
+      x = change_size(
+        source_path + file_names[i]
+      )  # 得到文件名
+      outname = file_names[i].replace(
+        "jpg",
+        "png"
+      )
+      outfile = save_path + outname
+      io.imsave(outfile, x)
+      cmd = f"/root/.yarn/bin/coffee ./png2avif.coffee {outfile}"
+      run(cmd)
+    except Exception as err:
+      traceback.print_exc()
+
     # while (i == 2600):
     #   break
   print("裁剪完毕")

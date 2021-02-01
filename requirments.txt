@@ -1,3 +1,4 @@
+pexpect
 scipy
 Pillow
 scikit-image
