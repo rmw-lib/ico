@@ -2,7 +2,7 @@
 
 import traceback
 from skimage import io
-from os.path import isfile
+from os.path import isfile, getsize
 import cv2
 import os
 import datetime
@@ -55,8 +55,10 @@ def main(n):
     print(i, "裁剪：", fname)
     outname = file_names[i].replace("jpg", "png")
     outfile = save_path + outname
-    if isfile(outfile[:-3] + "avif"):
-      continue
+    avif = outfile[:-3] + "avif"
+    if isfile(avif):
+      if getsize(avif):
+        continue
     try:
       x = change_size(
         source_path + fname
